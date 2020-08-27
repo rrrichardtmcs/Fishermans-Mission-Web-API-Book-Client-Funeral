@@ -49,19 +49,35 @@ class Constituents {
 
   
   public static function getAllDeceased() {
-    $url = self::$baseUri . 'constituents/search?search_text=' . $search_text;
+    $url = self::$baseUri . 'constituents?limit=5000&include_deceased=true';
     $headers = self::$headers;
     $headers[] = 'Content-type: application/x-www-form-urlencoded';
-    $response = Http::get($url, $headers);
+
+    $response = Http::get($url, $headers); // response is outputting a string
     $value = json_decode($response, true);
-    $full_set = $value['value'];
    
     // here we need to simplify the output to id/name of those who are deceased
-    $deceased = array_filter($full_set,function($Arr){
-      return $Arr['deceased'] == "true";
+    $deceased = array_filter($value["value"], function($arr){
+      if (isset($arr['deceased'])) {
+        return $arr['deceased'] == 'true';
+      }
     });
-    return $deceased;
-     //return $full_set;
+    
+    // print_r(json_encode($deceased));
+     return json_encode($deceased); // the encode makes it into a json to index.php
+
+
+
+     
+    //  GRABS one person
+    //  $url = self::$baseUri . 'constituents/30744';
+    //  $headers = self::$headers;
+    //  $headers[] = 'Content-type: application/x-www-form-urlencoded';
+ 
+    //  $response = Http::get($url, $headers); // response is outputting a string
+    // //  $value = json_decode($response, true);
+
+    // print_r($response);
   }
 
 

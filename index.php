@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-md-12"> 
         <label for="summary">Funeral activity summary</label>
-        <input type="text" name="ummary" id="summary">
+        <input type="text" name="summary" id="summary">
       </div>
     </div>
 
@@ -98,39 +98,87 @@
 <script>
 
 function fillConst(){
-  var options = {};
-        options.url = "/api/constituents.php?all=true";
-        options.type = "GET";
-        options.dataType = "json";
-        options.success = function (data) {
-            $("#constituent_id_list").empty();
-            for(var i=0;i<data.length;i++)
-            {
-                $("#constituent_id_list").append("<option value='" + 
-                data[i].id + "'>" + data[i].name + "</option>");
-            }
-        };
-        $.ajax(options);
+  // var options = {};
+  //       options.url = "/api/constituents.php?all=true";
+  //       options.type = "GET";
+  //       options.dataType = "json";
+
+
+        // returnedData = JSON.parse(data);
+        // options.success = function (data) {
+        // returnedData = JSON.parse(data);
+        //     $("#constituent_id_list").empty();
+        //     $("#constituent_id_list").append("<option value='test'></option>");
+        //     for(var i=0;i<data.length;i++)
+        //     {
+        //         $("#constituent_id_list").append("<option value='" + 
+        //         data[i].id + "'>" + data[i].name + "</option>");
+        //     }
+        // };
+
+        // options.done = function (response) {
+        //   valid = response;
+        //   console.log(valid); 
+        // }
+
+
+
+
+        // options.success = function (data) {
+        //   // receiving the data as an object
+        //   var result = data;
+        //   // I am getting responseText instead of responseJSON
+        //   console.log(result);
+        //   console.log(typeof result);
+        //     $("#constituent_id_list").empty();
+        //     $("#constituent_id_list").append("<option value='test'></option>");
+            
+        //     for(var i=0;i<result.length;i++)
+        //     {
+        //         $("#constituent_id_list").append("<option value='" + 
+        //         result[i].id + "'>" + result[i].name + "</option>");
+        //     }
+        // };
+
+        // $.ajax(options);
+
+
+        $.ajax({
+          type: 'GET',
+          url: "/api/constituents.php?all=true",
+          datatype: 'json',
+          success: function(datas) {
+            // console.log(JSON.parse(data));
+            $.each(JSON.parse(datas), function(i, data) {
+
+              // console.log(data)
+              $("#constituent_id_list").append("<option value='" + 
+                data.name + "'>" + data.name + "</option>");
+            })
+          }
+        })
+
+
 }
 
 fillConst();
 
-$("#constituent_id").on("input", function () {
-        var options = {};
-        options.url = "/api/constituents.php";
-        options.type = "GET";
-        options.data = { "search_text": $("#constituent_id").val() };
-        options.dataType = "json";
-        options.success = function (data) {
-            $("#constituent_id_list").empty();
-            for(var i=0;i<data.length;i++)
-            {
-                $("#constituent_id_list").append("<option value='" + 
-                data[i].id + "'>" + data[i].id + "</option>");
-            }
-        };
-        $.ajax(options);
-    });
+// $("#constituent_id").on("input", function () {
+//         var options = {};
+//         options.url = "/api/constituents.php";
+//         options.type = "GET";
+//         options.data = { "search_text": $("#constituent_id").val() };
+//         options.dataType = "json";
+//         options.success = function (data) {
+//             $("#constituent_id_list").empty();
+//             for(var i=0;i<data.length;i++)
+//             {
+//                 $("#constituent_id_list").append("<option value='" + 
+//                 data[i].id + "'>" + data[i].id + "</option>");
+//             }
+//         };
+//         $.ajax(options);
+//     });
 
 
   </script>

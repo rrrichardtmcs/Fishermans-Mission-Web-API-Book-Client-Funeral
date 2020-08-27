@@ -47,8 +47,7 @@ elseif (isset($_GET['search_text'])) {
 
 elseif (isset($_GET['all'])) {
   
-  
-  $data = blackbaud\Constituents::getAllDeceased());
+  $data = blackbaud\Constituents::getAllDeceased();
 
   //echo json_encode($data);
   // Access token has expired. Attempt to refresh.
@@ -66,7 +65,8 @@ elseif (isset($_GET['all'])) {
     $data = blackbaud\Constituents::getAllDeceased();
   }
 
-  echo json_encode($data);
+  return $data;
+  // echo json_encode($data);
 }
 // Update a constituent record.
 else {
