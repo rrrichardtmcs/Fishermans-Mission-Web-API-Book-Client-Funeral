@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/blackbaud/blackbaud.php';
+require_once '../includes/blackbaud/api/constituentactions.php';
 
 // Get one constituent action record by ID.
 if (isset($_GET['id'])) {
@@ -34,9 +35,11 @@ elseif (isset($_GET['action_id'])) {
 // Add a constituent action record.
 else {
   parse_str(file_get_contents('php://input'), $_POST);
-  $request_body = json_decode($_POST['data'], true);
-  if (isset($request_body['constituent_id'])) {
-    $data = blackbaud\ConstituentActions::add($request_body);
+
+  if (isset($_POST['constituent_id'])) {
+    $data = blackbaud\ConstituentActions::add(json_encode($_POST));
+
     echo json_encode(array('status' => 'success'));
+    // header(Location: ); // update in the future to send where you want
   }
 }

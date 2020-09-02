@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<form action="constituentactions.php" >
+<form action="api/constituentactions.php" method="post">
   <div class="container">
   <div class="row">
       <div class="col-md-12"> 
@@ -69,6 +69,8 @@
       </div>
     </div>
 
+    <input type="hidden" name="category" value="Task/Other">
+
     <div class="row">
       <div class="col-md-12"> 
         <label for="missionrepresentative">Mission Representative</label>
@@ -86,7 +88,7 @@
     
   </div>
     <input type="hidden" name="priority" value="Normal">
-    <input type="hidden" name="type" value ="Client Funeral Conducted">
+    <!-- <input type="hidden" name="type" value ="Client Funeral Conducted"> -->
     <input type="hidden" name="direction" value="Outbound">
     <input type="hidden" name="completed" value="false">
     <input type="hidden" name="outcome" value="Successful">
@@ -98,93 +100,23 @@
 <script>
 
 function fillConst(){
-  // var options = {};
-  //       options.url = "/api/constituents.php?all=true";
-  //       options.type = "GET";
-  //       options.dataType = "json";
+  $.ajax({
+    type: 'GET',
+    url: "/api/constituents.php?all=true",
+    datatype: 'json',
+    success: function(datas) {
+      $.each(JSON.parse(datas), function(i, data) {
 
-
-        // returnedData = JSON.parse(data);
-        // options.success = function (data) {
-        // returnedData = JSON.parse(data);
-        //     $("#constituent_id_list").empty();
-        //     $("#constituent_id_list").append("<option value='test'></option>");
-        //     for(var i=0;i<data.length;i++)
-        //     {
-        //         $("#constituent_id_list").append("<option value='" + 
-        //         data[i].id + "'>" + data[i].name + "</option>");
-        //     }
-        // };
-
-        // options.done = function (response) {
-        //   valid = response;
-        //   console.log(valid); 
-        // }
-
-
-
-
-        // options.success = function (data) {
-        //   // receiving the data as an object
-        //   var result = data;
-        //   // I am getting responseText instead of responseJSON
-        //   console.log(result);
-        //   console.log(typeof result);
-        //     $("#constituent_id_list").empty();
-        //     $("#constituent_id_list").append("<option value='test'></option>");
-            
-        //     for(var i=0;i<result.length;i++)
-        //     {
-        //         $("#constituent_id_list").append("<option value='" + 
-        //         result[i].id + "'>" + result[i].name + "</option>");
-        //     }
-        // };
-
-        // $.ajax(options);
-
-
-        $.ajax({
-          type: 'GET',
-          url: "/api/constituents.php?all=true",
-          datatype: 'json',
-          success: function(datas) {
-            // console.log(JSON.parse(data));
-            $.each(JSON.parse(datas), function(i, data) {
-
-              // console.log(data)
-              $("#constituent_id_list").append("<option value='" + 
-                data.name + "'>" + data.name + "</option>");
-            })
-          }
-        })
-
-
+        console.log(data)
+        $("#constituent_id_list").append("<option value='" + 
+          data.address.constituent_id + "'>" + data.name + "</option>");
+      })
+    }
+  })
 }
 
 fillConst();
 
-// $("#constituent_id").on("input", function () {
-//         var options = {};
-//         options.url = "/api/constituents.php";
-//         options.type = "GET";
-//         options.data = { "search_text": $("#constituent_id").val() };
-//         options.dataType = "json";
-//         options.success = function (data) {
-//             $("#constituent_id_list").empty();
-//             for(var i=0;i<data.length;i++)
-//             {
-//                 $("#constituent_id_list").append("<option value='" + 
-//                 data[i].id + "'>" + data[i].id + "</option>");
-//             }
-//         };
-//         $.ajax(options);
-//     });
-
-
-  </script>
-
-
-
-
+</script>
 </body>
 </html>
