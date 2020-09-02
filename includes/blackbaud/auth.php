@@ -9,7 +9,6 @@ class Auth {
   }
 
   public static function exchangeCodeForAccessToken($code = 0) {
-
     $body = array(
       'code' => $code,
       'grant_type' => 'authorization_code',

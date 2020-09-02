@@ -7,10 +7,9 @@ class ConstituentActions {
   
   public static function init() {
     self::$headers = array(
-      'bb-api-subscription-key: ' . AUTH_SUBSCRIPTION_KEY,
-      'Authorization: Bearer ' . Session::getAccessToken()
+      'Bb-Api-Subscription-Key: ' . AUTH_SUBSCRIPTION_KEY,
+      'Authorization: Bearer ' . Session::getAccessToken(),
     );
-    self::$baseUri = SKY_API_BASE_URI . 'constituent/v1/';
   }
 
   public static function getById($id = 0) {
@@ -21,11 +20,15 @@ class ConstituentActions {
     return json_decode($response, true);
   }
 
-  public static function add($action = array()) {
-    $url = self::$baseUri . 'actions';
-    $headers = self::$headers;
-    $headers[] = 'Content-type: application/json';
-    $response = Http::post($url, $action, $headers);
+  public static function add($action) {
+    self::$baseUri = SKY_API_BASE_URI;
+    $url = self::$baseUri . 'constituent/v1/actions';
+
+    array_push(self::$headers,'Content-Type: application/json');
+    array_push(self::$headers, 'Bb-Api-Subscription-Key: ' . AUTH_SUBSCRIPTION_KEY);
+    array_push(self::$headers, 'Authorization: Bearer ' . Session::getAccessToken());
+
+    $response = Http::applicationPost($url, $action, self::$headers);
     return json_decode($response, true);
   }
   

@@ -22,6 +22,7 @@ class Session {
     if (!self::isAuthenticated()) {
       return;
     }
+
     return $_SESSION[self::$tokenName]['refresh_token'];
   }
 

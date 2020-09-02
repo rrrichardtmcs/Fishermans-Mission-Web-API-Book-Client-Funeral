@@ -63,18 +63,18 @@ class Constituents {
       }
     });
     
-    // print_r(json_encode($deceased));
+    print_r(json_encode($deceased));
      return json_encode($deceased); // the encode makes it into a json to index.php
 
 
 
      
-    //  GRABS one person
-    //  $url = self::$baseUri . 'constituents/30744';
+    // //  GRABS one person which is out test data Mrs. Eileen Abel
+    //  $url = self::$baseUri . 'constituents/215030';
     //  $headers = self::$headers;
     //  $headers[] = 'Content-type: application/x-www-form-urlencoded';
  
-    //  $response = Http::get($url, $headers); // response is outputting a string
+    //  $response = Http::get($url, $headers);
     // //  $value = json_decode($response, true);
 
     // print_r($response);
