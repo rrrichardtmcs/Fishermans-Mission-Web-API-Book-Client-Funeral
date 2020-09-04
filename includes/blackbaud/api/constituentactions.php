@@ -31,6 +31,19 @@ class ConstituentActions {
     $response = Http::applicationPost($url, $action, self::$headers);
     return json_decode($response, true);
   }
+
+  public static function addCustomFields($action) {
+    self::$baseUri = SKY_API_BASE_URI;
+    $url = self::$baseUri . 'constituent/v1/actions/customfields';
+
+    array_push(self::$headers,'Content-Type: application/json');
+    array_push(self::$headers, 'Bb-Api-Subscription-Key: ' . AUTH_SUBSCRIPTION_KEY);
+    array_push(self::$headers, 'Authorization: Bearer ' . Session::getAccessToken());
+
+    $response = Http::applicationPost($url, $action, self::$headers);
+    var_dump('success response');
+    return json_decode($response, true);
+  }
   
   public static function update($action = array()) {
     $url = self::$baseUri . 'actions/' . $constituent['action_id'];
