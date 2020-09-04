@@ -39,6 +39,19 @@ else {
   if (isset($_POST['constituent_id'])) {
     $data = blackbaud\ConstituentActions::add(json_encode($_POST));
 
+    // this is to add those custom fields
+    // to explain more about this, there are the two links
+    // https://developer.sky.blackbaud.com/docs/services/56b76470069a0509c8f1c5b3/operations/ListActionCustomFieldCategoryDetails
+    // https://developer.sky.blackbaud.com/docs/services/56b76470069a0509c8f1c5b3/operations/CreateActionCustomField
+
+    if(isset($_POST['missionrepresentative'])) {
+      $customField = [];
+      $customField['category'] = "Mission Representative";
+      $customField['parent_id'] = $data['id'];
+      $customField['value'] = $_POST['missionrepresentative'];
+      $customFieldResponse = blackbaud\ConstituentActions::addCustomFields(json_encode($customField));
+    }
+
     echo json_encode(array('status' => 'success'));
     // header(Location: ); // update in the future to send where you want
   }
