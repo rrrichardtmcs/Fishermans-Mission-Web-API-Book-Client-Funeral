@@ -24,16 +24,14 @@
     </div>
   </div>
 </div>
-<form action="api/constituentactions.php" method="post">
+<form action="form/constituentactions.php" method="post">
   <div class="container">
-  <div class="row">
+    <div class="row">
       <div class="col-md-12"> 
         <label for="constituent_id">Deceased Client List</label>
         <input list="constituent_id_list" id="constituent_id" name="constituent_id" />
-             
-      <datalist id="constituent_id_list">
-          
-      </datalist>
+        <datalist id="constituent_id_list">
+        </datalist>
       </div>
     </div>
     
@@ -43,18 +41,21 @@
         <input type="date" name="date" id="date">
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12"> 
         <label for="start_time">Funeral activity start time</label>
         <input type="time" name="start_time" id="start_time">
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12"> 
         <label for="end_time">Funeral activity end time</label>
         <input type="time" name="end_time" id="end_time">
       </div>
-    </div>    
+    </div>   
+
     <div class="row">
       <div class="col-md-12"> 
         <label for="funeralactivity">Funeral activity being provided</label>
@@ -80,12 +81,10 @@
 
     <div class="row">
       <div class="col-md-12"> 
-        <button type="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
       </div>
     </div>
-
-    
-    
+ 
   </div>
     <input type="hidden" name="priority" value="Normal">
     <!-- <input type="hidden" name="type" value ="Client Funeral Conducted"> -->
@@ -95,14 +94,13 @@
     <input type="hidden" name="status" value="Booked">
   
 </form>
-
-
 <script>
 
+// this points to the form/constituents and triggers one of the if statements there based on the url
 function fillConst(){
   $.ajax({
     type: 'GET',
-    url: "/api/constituents.php?all=true",
+    url: "/form/constituents.php?all=true",
     datatype: 'json',
     success: function(datas) {
       $.each(JSON.parse(datas), function(i, data) {
