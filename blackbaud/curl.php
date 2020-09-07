@@ -1,7 +1,7 @@
 <?php
 namespace blackbaud;
 
-class Http {
+class Curl {
   
   public static function get($url = '', $headers = array()) {
     $ch = curl_init($url);

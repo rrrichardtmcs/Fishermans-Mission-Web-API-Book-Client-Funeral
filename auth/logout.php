@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/blackbaud/blackbaud.php';
+require_once '../blackbaud/blackbaud.php';
 
 blackbaud\Session::logout();
 echo json_encode(array());

@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/blackbaud/blackbaud.php';
+require_once '../blackbaud/blackbaud.php';
 
 $response = blackbaud\Auth::refreshAccessToken();
 

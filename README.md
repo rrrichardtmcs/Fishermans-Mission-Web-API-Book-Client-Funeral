@@ -44,7 +44,7 @@ Then, pass the request into the request's `data` property as a JSON string.
 ```
 $http({
   method: 'patch',
-  url: '/api/constituents.php',
+  url: '/form/constituents.php',
   data: `data=${JSON.stringify(patchData)}`,
   headers : {
     'Content-Type': 'application/x-www-form-urlencoded'

@@ -42,7 +42,7 @@ class Auth {
 
     $url = AUTH_BASE_URI . 'token';
 
-    $response = Http::post($url, $body, $headers);
+    $response = Curl::post($url, $body, $headers);
     $token = json_decode($response, true);
     Session::setToken($token);
     return $response;
